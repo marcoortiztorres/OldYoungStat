@@ -5,9 +5,11 @@ import matplotlib.pylab as plt
 
 class yearAvg:
     average = {}
+    weights = {}
 
     def __init__(self, year):
         self.setAvgs(year)
+        self.setWeight()
 
     def setAvgs(self, year):
         bat = batting()
@@ -15,15 +17,17 @@ class yearAvg:
         bat = bat.loc[(bat['yearID']==year) & (bat['AB']>0)]
         bat['BA'] = bat['H']/bat['AB']
         bat['ISO'] = (bat['2B']+2*bat['3B']+3*bat['HR'])/bat['AB']
-        self.average['BA'] = bat['BA'].mean()
-        self.average['ISO'] = bat['ISO'].mean()
-        self.average['BB'] = bat['BB'].mean()
-        self.average['SO'] = bat['SO'].mean()
-        self.average['SB'] = bat['SB'].mean()
-        # self.data = bat[['playerID','yearID','BA','ISO','SO','BB','SB']]
+        self.average['BA'] = bat['BA'].mean() # hits/AB - young
+        self.average['ISO'] = bat['ISO'].mean() # young
+        self.average['BB'] = bat['BB'].mean() # bases on balls (walks) - old
+        self.average['SO'] = bat['SO'].mean() # strike outs - old
+        self.average['SB'] = bat['SB'].mean() # stolen bases - young
 
+    def setWeight(self):
+        for i in self.average:
+            self.weights[i] = (4.20 / self.average[i]) # I want my scores to be avergeing around 4.20
 
     def getAvgs(self):
         return self.average
-year1 = yearAvg(2016)
-print(year1.getAvgs())
+    def getWeight(self):
+        return self.weights

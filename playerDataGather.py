@@ -1,6 +1,7 @@
 from pybaseball.lahman import *
 import pandas as pd
 import matplotlib.pylab as plt
+from dataAverageGather.py import yearAvg
 %matplotlib inline
 
 class player:
@@ -29,9 +30,6 @@ class player:
     def getName(self):
         return self.playerName
 
-    def getAge(self, year):
-        return year - self.palyerAge
-
     def setData(self, playerID):
         bat = batting()
         bat = bat.loc[bat['playerID']==playerID]
@@ -43,10 +41,11 @@ class player:
         return self.data
 
     def setChapoScore(self, year):
+        yearWeights = yearAvg(year)
         yearData = self.data.loc[self.data['yearID'] == year].set_index('playerID')
-        print(yearData)
+        yw = yearWeights.getWeight()
         ageWeight = (yearData['yearID'][self.playerID] - self.palyerBirthYear-24) / 12
-        self.ChapoScore = ((yearData['BA'][self.playerID]*14yearData['BA'][self.playerID]*14)*(1-ageWeight) + (yearData['ISO'][self.playerID]*yearData['SO'][self.playerID]*.5)*(ageWeight))/4
+        self.ChapoScore = ((yearData['SO'][self.playerID]*yw['SO']+yearData['BB'][self.playerID]*yw['BB'])*(1-ageWeight) + (yearData['ISO'][self.playerID]*yw['ISO'] + yearData['BB'][self.playerID]*yw['BB'] + yearData['SB'][self.playerID]*yw['SB'])*(ageWeight))/5
 
     def getChapoScore(self):
         return self.ChapoScore
