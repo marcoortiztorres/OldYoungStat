@@ -7,13 +7,14 @@ class player:
     playerID = ''
     playerName = ''
     palyerBirthYear = 0
+    ChapoScore = 0
     data = pd.DataFrame()
 
 
     def __init__(self, playerID):
         self.playerID = playerID
         self.playerName = self.getName()
-        self.setLahman(self.playerID)
+        self.setData(self.playerID)
         self.setInfo(self.playerID)
 
     def getStatcast(self, playerID):
@@ -23,7 +24,7 @@ class player:
         masterData = master()
         playerData = masterData.loc[masterData['playerID']==playerID].set_index('playerID')
         self.playerName = playerData['nameFirst'][playerID] + ' ' + playerData['nameLast'][playerID]
-        self.palyerAge = playerData['birthYear'][playerID]
+        self.palyerBirthYear = playerData['birthYear'][playerID]
 
     def getName(self):
         return self.playerName
@@ -31,11 +32,28 @@ class player:
     def getAge(self, year):
         return year - self.palyerAge
 
-    def setLahman(self, playerID):
+    def setData(self, playerID):
         bat = batting()
-        self.data = bat.loc[bat['playerID']==playerID]
+        bat = bat.loc[bat['playerID']==playerID]
+        bat['BA'] = bat['H']/bat['AB']
+        bat['ISO'] = (bat['2B']+2*bat['3B']+3*bat['HR'])/bat['AB']
+        self.data = bat[['playerID','yearID','BA','ISO','SO','BB','SB']]
 
-    def getLahman(self):
+    def getData(self):
         return self.data
 
-OldP = player('freemfr01')
+    def setChapoScore(self, year):
+        yearData = self.data.loc[self.data['yearID'] == year].set_index('playerID')
+        print(yearData)
+        ageWeight = (yearData['yearID'][self.playerID] - self.palyerBirthYear-24) / 12
+        self.ChapoScore = ((yearData['BA'][self.playerID]*14yearData['BA'][self.playerID]*14)*(1-ageWeight) + (yearData['ISO'][self.playerID]*yearData['SO'][self.playerID]*.5)*(ageWeight))/4
+
+    def getChapoScore(self):
+        return self.ChapoScore
+
+
+
+OldP = player('beckhgo01')
+OldP.getData()
+OldP.setChapoScore(2015)
+OldP.getChapoScore()
