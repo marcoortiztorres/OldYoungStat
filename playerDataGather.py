@@ -8,6 +8,7 @@ class player:
     playerID = ''
     playerName = ''
     palyerBirthYear = 0
+    yearsPlayed = []
     ChapoScore = 0
     data = pd.DataFrame()
 
@@ -26,6 +27,7 @@ class player:
         playerData = masterData.loc[masterData['playerID']==playerID].set_index('playerID')
         self.playerName = playerData['nameFirst'][playerID] + ' ' + playerData['nameLast'][playerID]
         self.palyerBirthYear = playerData['birthYear'][playerID]
+        self.yearsPlayed = self.data['yearID'].tolist()
 
     def getName(self):
         return self.playerName
@@ -44,15 +46,28 @@ class player:
         yearWeights = yearAvg(year)
         yearData = self.data.loc[self.data['yearID'] == year].set_index('playerID')
         yw = yearWeights.getWeight()
-        ageWeight = (yearData['yearID'][self.playerID] - self.palyerBirthYear-24) / 12
-        self.ChapoScore = ((yearData['SO'][self.playerID]*yw['SO']+yearData['BB'][self.playerID]*yw['BB'])*(1-ageWeight) + (yearData['ISO'][self.playerID]*yw['ISO'] + yearData['BB'][self.playerID]*yw['BB'] + yearData['SB'][self.playerID]*yw['SB'])*(ageWeight))/5
+        age = yearData['yearID'][self.playerID] - self.palyerBirthYear
+        old_scores = yearData['SO'][self.playerID]*yw['SO']+yearData['BB'][self.playerID]*yw['BB']
+        young_scores = yearData['ISO'][self.playerID]*yw['ISO'] + yearData['BA'][self.playerID]*yw['BA'] + yearData['SB'][self.playerID]*yw['SB']
+        if age <= 27:
+            self.ChapoScore = (young_scores*(0.6) + old_scores*1.4)/5
+        else:
+            self.ChapoScore = (young_scores*(1.4) + old_scores*0.6)/5
 
+    def getYearsPlayed(self):
+        return self.yearsPlayed
     def getChapoScore(self):
         return self.ChapoScore
 
+    def getSummary(self):
+        print(self.playerName, "Score Summary")
+        print("="*30)
+        for year in self.yearsPlayed:
+            age = year - self.palyerBirthYear
+            self.setChapoScore(year)
+            print("age: ",age, "|",year,"score: ",self.getChapoScore())
 
 
-OldP = player('beckhgo01')
-OldP.getData()
-OldP.setChapoScore(2015)
-OldP.getChapoScore()
+OldP = player('harpebr03')
+print(OldP.getYearsPlayed())
+OldP.getSummary()
