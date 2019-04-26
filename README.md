@@ -1,9 +1,11 @@
 # OldYoungStat
 Give me a baseball player and I will tell you how good they really are!
 
-The code was meant to run on a jupyter notebook, but it stopped working on my computer.
+Using a lahman dataset, I have calculated my own statistic which aims to set a universal scoreing system for players regardless of age. As we know, a players preformance varies by age with the peak at age 26. In order to account for this preformance change, I have weighted the players age in my calculation in order to have a consistance player score across their career. 
 
-So instead you can run it from your terminal by running:
+The statistics that I consider in this calculation are sacraficed flies & walk as older player skill and stolen bases & ISO as younger player skills. These scores are all averaged out by the average of the season. Finally the young scores are weighted lower if they are younger with the older scores being weighted higher and the vice versa if they are older. 
+
+The code was meant to run on a jupyter notebook, but it stopped working on my computer. So instead you can run it from your terminal by running:
 
 ```
 python main.py
