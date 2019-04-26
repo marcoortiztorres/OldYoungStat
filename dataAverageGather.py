@@ -1,7 +1,6 @@
 from pybaseball.lahman import *
 import pandas as pd
 import matplotlib.pylab as plt
-%matplotlib inline
 
 class yearAvg:
     average = {}
@@ -22,6 +21,7 @@ class yearAvg:
         self.average['BB'] = bat['BB'].mean() # bases on balls (walks) - old
         self.average['SO'] = bat['SO'].mean() # strike outs - old
         self.average['SB'] = bat['SB'].mean() # stolen bases - young
+        self.average['SF'] = bat['SF'].mean() # sacfriced flies - old
 
     def setWeight(self):
         for i in self.average:
