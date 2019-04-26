@@ -9,7 +9,7 @@ So instead you can run it from your terminal by running:
 python main.py
 ```
 
-you will be prompted to enter in a playerID and if you don't know any by heart, don't worry I have a couple here that you can use
+You will be prompted to enter in a playerID and if you don't know any by heart, don't worry I have a couple here that you can use
 
 **Good Players:**
 
