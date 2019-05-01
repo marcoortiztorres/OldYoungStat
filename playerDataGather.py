@@ -51,14 +51,12 @@ class player:
         # get all the data for one player in a specific year
         yearData = self.data.loc[self.data['yearID'] == year].set_index('playerID')
         age = yearData['yearID'][self.playerID] - self.palyerBirthYear
+        age_weight = 0.00625*(float(age)-23)**3 + 1
         old_scores = yearData['SF'][self.playerID]/ya['SF']+yearData['BB'][self.playerID]/ya['BB']
         young_scores = yearData['ISO'][self.playerID]/ya['ISO'] + yearData['SB'][self.playerID]/ya['SB']
         self.yearISO = yearData['ISO'][self.playerID]
         try:
-            if age <= 23:
-                self.ChapoScore = (young_scores*(0.6) + old_scores*1.4)/5
-            else:
-                self.ChapoScore = (young_scores*(1.8) + old_scores*0.2)/5
+            self.ChapoScore = (young_scores*(age_weight) + old_scores*(2-age_weight))/4
         except:
             self.ChapoScore = 0
 
