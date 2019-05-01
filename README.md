@@ -6,7 +6,7 @@ While taking this class there was always one reoccurring thing that would affect
 
 ### What is the statistic? ###
 
-<img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
+<a href="https://www.codecogs.com/eqnedit.php?latex=age_{weight}=&space;0.00625(age-26)^3&plus;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?age_{weight}=&space;0.00625(age-26)^3&plus;1" title="age_{weight}= 0.00625(age-26)^3+1" /></a>
 
 The Chapo statistic is a combinate of 4 statistics, half of which I have defined to be young player statistics and the other half old player statistics. The young player statistics are those which value speed and power, where the old player statistics value more sacrifices and hits. The players score is then divided by the average to get a normalised score for each statistic. The weight was made to be a cubic formula so that as the player gets closer to the performance peak their scores level off. Otherwise as they get older the weight gets larger so younger player scores are weighed higher, and older player scores are weighed lower. 
 
