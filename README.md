@@ -8,6 +8,12 @@ While taking this class there was always one reoccurring thing that would affect
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=age_{weight}=&space;0.00625(age-26)^3&plus;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?age_{weight}=&space;0.00625(age-26)^3&plus;1" title="age_{weight}= 0.00625(age-26)^3+1" /></a>
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=young=&space;\frac{ISO}{ISO_{agv}}&space;&plus;&space;\frac{SB}{SB_{agv}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?young=&space;\frac{ISO}{ISO_{agv}}&space;&plus;&space;\frac{SB}{SB_{agv}}" title="young= \frac{ISO}{ISO_{agv}} + \frac{SB}{SB_{agv}}" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=old=&space;\frac{SF}{SF_{agv}}&space;&plus;&space;\frac{BB}{BB_{agv}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?old=&space;\frac{SF}{SF_{agv}}&space;&plus;&space;\frac{BB}{BB_{agv}}" title="old= \frac{SF}{SF_{agv}} + \frac{BB}{BB_{agv}}" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=chapo=\frac{young*age_{weight}&plus;old*(2-age_{weight})}{4}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?chapo=\frac{young*age_{weight}&plus;old*(2-age_{weight})}{4}" title="chapo=\frac{young*age_{weight}+old*(2-age_{weight})}{4}" /></a>
+
 The Chapo statistic is a combinate of 4 statistics, half of which I have defined to be young player statistics and the other half old player statistics. The young player statistics are those which value speed and power, where the old player statistics value more sacrifices and hits. The players score is then divided by the average to get a normalised score for each statistic. The weight was made to be a cubic formula so that as the player gets closer to the performance peak their scores level off. Otherwise as they get older the weight gets larger so younger player scores are weighed higher, and older player scores are weighed lower. 
 
 ### Similar Statistics ###
